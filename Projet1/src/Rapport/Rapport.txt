@@ -1,0 +1,41 @@
+
+
+Introduction 
+
+Ce projet à pour but faire un programme en JAVA permettant de deviner, pour un mot, la langue dans laquelle il est écrit. On utilisera des fonctions simples puis nous améliorerons celles ci, nous calculerons aussi leures performances. Ces fonctions seront appliquées à des corpus écrits dans différentes langues.
+
+
+
+I Modélisation mathématique / Structure du programme.
+
+
+
+	Le programme possède, dans un premier temps, une classe "Corpus" permettant de lire et toute autre interraction avec les corpus. Elle stocke dans un Hashmap chaque nombre de lettre référencées dans un corpus pour chaque langue.
+Ensuite, la classe "Mot" possède un arribut Corpus et travail sur celui ci. Elle utilise 2 fonctions "ProbaAppLettre" et "FreqApp" pour faire un première determination de la langue d'un mot grâce à la formule p(w|l)= Multiplications des p(w|l) pour chaque caractères. La determination rendra la langue possèdant la plus grosse valeur de cette dernière formule.
+Finalement, la classe "DetLangue" est la plus remplie. Elle possède un arrtibut Mot pour créer la Determination suggérée précédement. Elle possède 3 fonctions de performances "Performances", "Performances2", "Performances3" pour les 3 fonctions de determinations créees, ces performances sont calculées de la manière suivante : 1 - nb reponses fausse / nb reponses. Pour cela on nous as donné une base de test prédeterminée. Elle possède aussi diverses fonctions de soutiens aux fonctions de determination. La deuxième fonction de détermination améliore simplement la première en utilisant en plus la fonction de performance. La troisième fonction de determination "DeterminationAmeliore" est totalement différente et se base sur un modèle mathématique plus profond : probabilité d'un mot sachant la langue = Multiplications des probabilité d'une lettre sachant la suivante.
+ 
+ 
+II Experiences / Interpretations
+
+
+	La première fonction de determination se base sur un modèle très simple et évident : pour un mot recherché, on compte chaqune des lettre contenue dans le texte puis on le divise par le nombre de caractère total de ce texte. C'est sans doute la première manière qui nous vient à l'ésprit naturellement pour ce problème.
+La deuxième fonction Determination2 permet d'améliorer les résultats en utilisant une base d'éxemples. Cette fonction permet d'améliorer les résultats seulement si la base de test est suffisament grande, dans notre cas, la base de test semble suffisament petite pour ne pas appercevoir de changement majeur sur les probabilités recherchées.
+L'interpretation des performances peux se faire grâce à une fonction "EvolutionPerformance" qui permet de mesurer l'évolution des performances selon la taille d'un texte. Tous les 10% du texte la performances est de nouveau calculée.
+La troisième fonction "DeterminationAmeliore" utilise un HashMap et stock chaques doublons de lettre présent dans le texte "ch", "on"... Ainsi un mot donné en parametre, découpé en caractère, pourra se faire determiner le caractère le plus probables pour chaque caractère sachant la langue. Nous retournerons la multiplications de ces probabilités pour chaque caractère. Cette fonction est sans doute la plus prècise ici (augmetation nette des probabilités) mais possède cependant certains défauts de précision : il faut que le texte soit d'une grande taille pour qu'elle possède de grandes variétées de doublons dans son HashMap et ainsi être efficace. Par exemple le mot "thanks" n'est pas corréctement determiné car le doublon "ks" n'éxiste dans aucun des corpus donnés et la probabilité reste 0;
+
+
+III Améliorations / Adaptations
+
+	La première amélioration à proposer serait d'améliorer les corpus pour la précision de chaqune des fonctions.
+Ensuite nous pouvons également àméliorer la base de test pour améliorer les performances.
+Les améliorations faites dans ce projet au niveau de l'algorithme ne vont pas plus loin que celles proposés dans la fonction "DeterminationAmeliore" qui possède une bonne determination si le texte est suffisament grand.
+
+
+
+
+Conclusion
+
+	Les formules mathématiques de bases proposés dans le sujet permettent déja trouver des résultats satisfaisants (> 50%).
+En aggrandissant le corpus et la base de test les résultats sont meilleures.
+En utilisant un algorithme basé sur des notions mathématiques plus profondes les résultats sont nettement meilleures. 
+On peux supposer qu'avec une base de test et corpus immmenses, nous nous rapprochons d'un système optimal. 
